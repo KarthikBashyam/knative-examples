@@ -1,0 +1,21 @@
+
+apiVersion: build.knative.dev/v1alpha1
+kind: BuildTemplate
+metadata:
+  name: knative-build-template
+spec:
+  parameters: 
+  - name: IMAGE
+    description: The name of the image to push
+  - name: DOCKERFILE
+    description: Path to the Dockerfile to build.
+    default: /workspace/Dockerfile
+  - name: SOURCES
+    description: Source directory
+    default: /workspace
+  steps:    
+    - name: docker-build-and-push
+      image: gcr.io/kaniko-project/executor
+      args:
+      - --dockerfile=${DOCKERFILE}
+      - --destination=${IMAGE}
