@@ -1,0 +1,17 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: helloworld-nodejs
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        metadata:
+          annotations:
+              autoscaling.knative.dev/minScale: "1"
+        spec:
+          container:
+            image: registry.hub.docker.com/bashdocker/nodejs-helloworld:latest            
+            env:
+            - name: SERVICE_NAME
+              value: "Knative Service 1"

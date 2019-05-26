@@ -1,10 +1,10 @@
 apiVersion: build.knative.dev/v1alpha1
 kind: Build
 metadata:
-  name: nodejs-service
+  name: nodejs-service-build
 spec:
-  timeout: 20m
-  serviceAccountName: builder
+  timeout: 50m
+  serviceAccountName: build-bot
   source:    
     git:
       url: https://github.com/KarthikBashyam/nodejs-docker.git
@@ -13,4 +13,4 @@ spec:
     name: knative-build-template
     arguments:    
     - name: IMAGE
-      value: registry.hub.docker.com/bashdocker/nodejs-helloworld:latest
+      value: docker.io/bashdocker/nodejs-helloworld:latest
