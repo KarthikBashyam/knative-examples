@@ -1,4 +1,6 @@
 minishift addons apply admin-user
+minishift addons enable anyuid
+minishift addon enable admissions-webhook
 oc adm policy add-scc-to-user privileged -z default
 oc label namespace knative-project istio-injection=enabled
 oc adm policy add-scc-to-user anyuid -z istio-ingress-service-account -n istio-system
@@ -23,3 +25,7 @@ oc adm policy add-cluster-role-to-user cluster-admin -z controller -n knative-se
 oc apply --filename https://github.com/knative/serving/releases/download/v0.5.2/serving.yaml
 oc apply --filename https://github.com/knative/build/releases/download/v0.5.0/build.yaml
 oc apply --filename https://raw.githubusercontent.com/knative/serving/v0.5.2/third_party/config/build/clusterrole.yaml
+
+#EVENTING
+#oc apply --filename https://github.com/knative/eventing/releases/download/v0.6.0/release.yaml
+#oc apply --filename https://github.com/knative/eventing-sources/releases/download/v0.6.0/eventing-sources.yaml 
